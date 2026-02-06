@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "target": {
+    "channel": "telegram",
+    "chatId": "-1003557311101",
+    "topicId": "1"
+  },
+  "sources": {
+    "marketplace": [
+      "https://www.facebook.com/marketplace/category/propertyrentals?maxPrice=10000&exact=false"
+    ],
+    "groups": [
+      "https://www.facebook.com/groups/2065942027026008/?sorting_setting=RECENT_LISTING_ACTIVITY",
+      "https://www.facebook.com/groups/457465901082882/?sorting_setting=RECENT_ACTIVITY",
+      "https://www.facebook.com/groups/429827780505313/?sorting_setting=RECENT_LISTING_ACTIVITY"
+    ]
+  },
+  "filters": {
+    "area": {
+      "city": "Tel Aviv",
+      "northLimit": "Sderot Ben Gurion",
+      "southLimit": "Nahalat Binyamin",
+      "notes": "Infer if listing is in central TLV based on street name mention in post/listing. Start strict and expand allowlist over time."
+    },
+    "rooms": { "min": 2, "max": 4 },
+    "maxPriceIls": 10000,
+    "includeIfMentions": ["roof", "rooftop", "גג", "מרפסת גג"],
+    "excludeIfMentions": [
+      "roommate",
+      "roommates",
+      "שותף",
+      "שותפים",
+      "sublet",
+      "סאבלט",
+      "short term",
+      "short-term",
+      "airbnb",
+      "לטווח קצר"
+    ],
+    "includeIfMentionsAny": ["agent", "broker", "מתווך", "תיווך"],
+    "currencySymbols": ["₪", "NIS", "ILS"]
+  },
+  "seen": {
+    "byUrl": {}
+  },
+  "lastRun": null
+}

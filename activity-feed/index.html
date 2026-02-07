@@ -17,11 +17,7 @@
       --info: #58a6ff;
     }
     
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -41,6 +37,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     
     h1 {
@@ -53,125 +51,116 @@
     
     .controls {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       align-items: center;
+      flex-wrap: wrap;
     }
     
-    .controls label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-    }
-    
-    input[type="checkbox"] {
-      accent-color: var(--accent);
-    }
-    
-    select, button {
-      background: var(--surface);
+    select, button, input {
+      background: var(--bg);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 6px;
       font-size: 0.875rem;
       cursor: pointer;
     }
     
-    button:hover {
-      background: var(--border);
-    }
+    select:hover, button:hover { background: var(--surface); border-color: var(--text-muted); }
+    button.primary { background: var(--accent); border-color: var(--accent); }
+    button.primary:hover { opacity: 0.9; }
     
     .stats {
-      display: flex;
-      gap: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
       padding: 1rem 2rem;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
     }
     
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
     
-    .stat-value {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
+    main { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
     
     .filters {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       flex-wrap: wrap;
+      align-items: center;
     }
     
-    .filter-btn {
-      padding: 0.375rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8125rem;
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      background: var(--surface);
+      border-radius: 6px;
       border: 1px solid var(--border);
+    }
+    
+    .filter-group label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    
+    .filter-group select {
+      padding: 0.25rem 0.5rem;
+      border: none;
       background: transparent;
     }
     
-    .filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
+    .filter-pills {
+      display: flex;
+      gap: 0.375rem;
+      flex-wrap: wrap;
     }
     
-    .timeline {
-      position: relative;
+    .pill {
+      padding: 0.25rem 0.625rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.15s;
     }
     
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 24px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
-    }
+    .pill:hover { border-color: var(--text-muted); }
+    .pill.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .pill.active.success { background: var(--success); border-color: var(--success); }
+    .pill.active.error { background: var(--error); border-color: var(--error); }
+    .pill.active.info { background: var(--info); border-color: var(--info); }
+    
+    .timeline { position: relative; }
     
     .event {
-      position: relative;
-      padding-left: 60px;
-      padding-bottom: 1.5rem;
-      animation: slideIn 0.3s ease;
+      display: grid;
+      grid-template-columns: 80px 32px 1fr;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      animation: fadeIn 0.2s ease;
     }
     
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    
+    .event-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+      padding-top: 0.25rem;
     }
     
     .event-icon {
-      position: absolute;
-      left: 12px;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -179,80 +168,78 @@
       font-size: 0.875rem;
       background: var(--surface);
       border: 2px solid var(--border);
+      flex-shrink: 0;
     }
     
     .event-icon.tool { border-color: var(--info); }
     .event-icon.error { border-color: var(--error); }
-    .event-icon.message { border-color: var(--success); }
-    .event-icon.session { border-color: var(--accent); }
+    .event-icon.model { border-color: var(--success); }
+    .event-icon.message { border-color: var(--accent); }
     
-    .event-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-    }
+    .event-content { min-width: 0; }
     
     .event-header {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.5rem;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
     
     .event-action {
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.9rem;
     }
     
-    .event-status {
-      font-size: 0.75rem;
-      padding: 0.125rem 0.5rem;
-      border-radius: 10px;
+    .event-badge {
+      font-size: 0.625rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 8px;
       font-weight: 500;
+      text-transform: uppercase;
     }
     
-    .event-status.success { background: rgba(63, 185, 80, 0.2); color: var(--success); }
-    .event-status.error { background: rgba(248, 81, 73, 0.2); color: var(--error); }
-    .event-status.info { background: rgba(88, 166, 255, 0.2); color: var(--info); }
+    .event-badge.success { background: rgba(63, 185, 80, 0.15); color: var(--success); }
+    .event-badge.error { background: rgba(248, 81, 73, 0.15); color: var(--error); }
+    .event-badge.info { background: rgba(88, 166, 255, 0.15); color: var(--info); }
+    .event-badge.start { background: rgba(255, 107, 53, 0.15); color: var(--accent); }
     
-    .event-time {
-      font-size: 0.75rem;
+    .event-agent {
+      font-size: 0.7rem;
       color: var(--text-muted);
+      background: var(--bg);
+      padding: 0.125rem 0.375rem;
+      border-radius: 4px;
     }
     
-    .event-message {
-      font-size: 0.875rem;
+    .event-details {
+      font-size: 0.8rem;
       color: var(--text-muted);
       font-family: 'SF Mono', Monaco, monospace;
+      margin-top: 0.375rem;
       background: var(--bg);
       padding: 0.5rem;
       border-radius: 4px;
       overflow-x: auto;
       white-space: pre-wrap;
       word-break: break-word;
-      max-height: 150px;
+      max-height: 120px;
       overflow-y: auto;
     }
+    
+    .event-meta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.375rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    
+    .event-meta span { display: flex; align-items: center; gap: 0.25rem; }
     
     .empty-state {
       text-align: center;
       padding: 4rem 2rem;
       color: var(--text-muted);
-    }
-    
-    .empty-state svg {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-    
-    .load-more {
-      text-align: center;
-      padding: 1rem;
     }
     
     #status {
@@ -277,9 +264,14 @@
       animation: pulse 2s infinite;
     }
     
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+    .pulse.error { background: var(--error); }
+    .pulse.warn { background: var(--accent); }
+    
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    
+    .load-more {
+      text-align: center;
+      padding: 1rem;
     }
   </style>
 </head>
@@ -287,248 +279,272 @@
   <header>
     <h1>🦞 Activity Feed</h1>
     <div class="controls">
-      <label>
-        <input type="checkbox" id="autoRefresh" checked>
-        Auto-refresh
-      </label>
-      <select id="dateSelect">
-        <option value="today">Today</option>
-      </select>
+      <select id="agentSelect"><option value="">All Agents</option></select>
+      <select id="toolSelect"><option value="">All Tools</option></select>
       <button id="refreshBtn">↻ Refresh</button>
     </div>
   </header>
   
   <div class="stats">
     <div class="stat">
-      <div class="stat-value" id="totalEvents">0</div>
-      <div class="stat-label">Total Events</div>
+      <div class="stat-value" id="totalEvents">-</div>
+      <div class="stat-label">Events</div>
     </div>
     <div class="stat">
-      <div class="stat-value" id="toolCalls">0</div>
+      <div class="stat-value" id="toolCalls">-</div>
       <div class="stat-label">Tool Calls</div>
     </div>
     <div class="stat">
-      <div class="stat-value" id="errorCount">0</div>
+      <div class="stat-value" id="errorCount">-</div>
       <div class="stat-label">Errors</div>
     </div>
     <div class="stat">
-      <div class="stat-value" id="successRate">--</div>
-      <div class="stat-label">Success Rate</div>
+      <div class="stat-value" id="totalTokens">-</div>
+      <div class="stat-label">Tokens</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="totalCost">-</div>
+      <div class="stat-label">Cost</div>
     </div>
   </div>
   
   <main>
     <div class="filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="tool">🔧 Tools</button>
-      <button class="filter-btn" data-filter="message">💬 Messages</button>
-      <button class="filter-btn" data-filter="error">❌ Errors</button>
-      <button class="filter-btn" data-filter="session">📋 Sessions</button>
+      <div class="filter-pills" id="typeFilters">
+        <button class="pill active" data-type="">All</button>
+        <button class="pill" data-type="tool">🔧 Tools</button>
+        <button class="pill" data-type="model">🧠 Model</button>
+        <button class="pill" data-type="error">❌ Errors</button>
+      </div>
+      <div class="filter-pills" id="statusFilters">
+        <button class="pill active" data-status="">Any Status</button>
+        <button class="pill success" data-status="success">✓ Success</button>
+        <button class="pill error" data-status="error">✗ Error</button>
+        <button class="pill info" data-status="start">⏳ Start</button>
+      </div>
     </div>
     
     <div class="timeline" id="timeline">
       <div class="empty-state">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
         <p>Loading activity...</p>
       </div>
+    </div>
+    
+    <div class="load-more">
+      <button id="loadMoreBtn" style="display:none">Load More</button>
     </div>
   </main>
   
   <div id="status">
-    <span class="pulse"></span>
+    <span class="pulse" id="statusPulse"></span>
     <span id="statusText">Connecting...</span>
   </div>
 
   <script>
-    // API configuration
     const API_URL = 'http://localhost:8742';
-    let useApi = false;
     
-    // Demo data for fallback when API is not available
-    const DEMO_EVENTS = [
-      { ts: Date.now() - 60000, id: '1', type: 'tool', action: 'exec', status: 'success', message: 'ls -la /Users/eylonaviv/.openclaw' },
-      { ts: Date.now() - 120000, id: '2', type: 'tool', action: 'web_fetch', status: 'success', message: 'https://x.com/alexfinn/status/2019816560190521563' },
-      { ts: Date.now() - 180000, id: '3', type: 'error', action: 'browser', status: 'error', message: 'Chrome extension relay is running, but no tab is connected' },
-      { ts: Date.now() - 240000, id: '4', type: 'message', action: 'telegram/api', status: 'info', message: 'sendChatAction: typing' },
-      { ts: Date.now() - 300000, id: '5', type: 'session', action: 'state', status: 'info', message: 'agent:demrezel:telegram:group:-1003557311101:topic:1' },
-      { ts: Date.now() - 360000, id: '6', type: 'tool', action: 'session_status', status: 'error', message: 'Model "openai-codex/gpt-5.3" is not allowed.' },
-    ];
-
     let events = [];
-    let currentFilter = 'all';
-    let autoRefresh = true;
-    let refreshInterval;
-    let lastEventTs = 0;
-
-    const icons = {
-      tool: '🔧',
-      error: '❌',
-      message: '💬',
-      session: '📋',
-      model: '🧠',
-      command: '⚡',
-    };
-
+    let filters = { type: '', status: '', agent: '', tool: '' };
+    let limit = 100;
+    
+    const icons = { tool: '🔧', error: '❌', model: '🧠', message: '💬' };
+    
     function formatTime(ts) {
-      return new Date(ts).toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        second: '2-digit'
-      });
+      return new Date(ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     }
-
-    function renderEvent(event) {
-      const icon = icons[event.type] || '⚡';
+    
+    function formatNumber(n) {
+      if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+      return n.toString();
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text || '';
+      return div.innerHTML;
+    }
+    
+    function truncate(str, len = 200) {
+      if (!str) return '';
+      return str.length > len ? str.slice(0, len) + '...' : str;
+    }
+    
+    function renderEvent(e) {
+      const icon = icons[e.type] || '⚡';
+      const details = e.params ? JSON.stringify(e.params, null, 2) : e.result;
+      const hasTokens = e.tokens?.total > 0;
+      const hasCost = e.cost > 0;
+      
       return `
-        <div class="event" data-type="${event.type}">
-          <div class="event-icon ${event.type}">${icon}</div>
-          <div class="event-card">
+        <div class="event" data-type="${e.type}" data-status="${e.status}">
+          <div class="event-time">${formatTime(e.ts)}</div>
+          <div class="event-icon ${e.type}">${icon}</div>
+          <div class="event-content">
             <div class="event-header">
-              <span class="event-action">
-                ${event.action}
-                <span class="event-status ${event.status}">${event.status}</span>
-              </span>
-              <span class="event-time">${formatTime(event.ts)}</span>
+              <span class="event-action">${e.action}</span>
+              <span class="event-badge ${e.status}">${e.status}</span>
+              ${e.agentId ? `<span class="event-agent">${e.agentId}</span>` : ''}
+              ${e.model ? `<span class="event-agent">${e.model}</span>` : ''}
             </div>
-            ${event.message ? `<div class="event-message">${escapeHtml(event.message)}</div>` : ''}
+            ${details ? `<div class="event-details">${escapeHtml(truncate(details, 300))}</div>` : ''}
+            ${hasTokens || hasCost ? `
+              <div class="event-meta">
+                ${hasTokens ? `<span>🎫 ${formatNumber(e.tokens.total)} tokens</span>` : ''}
+                ${hasCost ? `<span>💰 $${e.cost.toFixed(4)}</span>` : ''}
+              </div>
+            ` : ''}
           </div>
         </div>
       `;
     }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    function updateStats() {
-      document.getElementById('totalEvents').textContent = events.length;
-      document.getElementById('toolCalls').textContent = events.filter(e => e.type === 'tool').length;
-      document.getElementById('errorCount').textContent = events.filter(e => e.status === 'error').length;
-      
-      const tools = events.filter(e => e.type === 'tool');
-      const successful = tools.filter(e => e.status === 'success').length;
-      const rate = tools.length > 0 ? Math.round((successful / tools.length) * 100) : 100;
-      document.getElementById('successRate').textContent = `${rate}%`;
-    }
-
+    
     function render() {
-      const filtered = currentFilter === 'all' 
-        ? events 
-        : events.filter(e => e.type === currentFilter);
+      const filtered = events.filter(e => {
+        if (filters.type && e.type !== filters.type) return false;
+        if (filters.status && e.status !== filters.status) return false;
+        if (filters.agent && e.agentId !== filters.agent) return false;
+        if (filters.tool && e.action !== filters.tool) return false;
+        return true;
+      });
       
       const timeline = document.getElementById('timeline');
       
       if (filtered.length === 0) {
-        timeline.innerHTML = `
-          <div class="empty-state">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-            </svg>
-            <p>No ${currentFilter === 'all' ? '' : currentFilter + ' '}events yet</p>
-          </div>
-        `;
+        timeline.innerHTML = `<div class="empty-state"><p>No events match your filters</p></div>`;
         return;
       }
       
-      timeline.innerHTML = filtered
-        .sort((a, b) => b.ts - a.ts)
-        .slice(0, 100)
-        .map(renderEvent)
-        .join('');
+      timeline.innerHTML = filtered.slice(0, limit).map(renderEvent).join('');
       
-      updateStats();
+      document.getElementById('loadMoreBtn').style.display = 
+        filtered.length > limit ? 'inline-block' : 'none';
     }
-
+    
     async function fetchEvents() {
-      document.getElementById('statusText').textContent = 'Fetching...';
+      const statusText = document.getElementById('statusText');
+      const statusPulse = document.getElementById('statusPulse');
+      
+      statusText.textContent = 'Fetching...';
       
       try {
-        // Try to fetch from live API first
-        const url = lastEventTs > 0 
-          ? `${API_URL}/api/activity?limit=200&since=${lastEventTs}` 
-          : `${API_URL}/api/activity?limit=200`;
+        const params = new URLSearchParams({ limit: '500' });
+        if (filters.agent) params.set('agent', filters.agent);
         
-        const res = await fetch(url, { 
-          signal: AbortSignal.timeout(2000) 
+        const res = await fetch(`${API_URL}/api/activity?${params}`, {
+          signal: AbortSignal.timeout(5000)
         });
         
-        if (res.ok) {
-          const newEvents = await res.json();
-          useApi = true;
-          
-          if (lastEventTs > 0 && newEvents.length > 0) {
-            // Merge new events
-            const existingIds = new Set(events.map(e => e.id));
-            const uniqueNew = newEvents.filter(e => !existingIds.has(e.id));
-            events = [...uniqueNew, ...events].slice(0, 1000);
-          } else {
-            events = newEvents;
-          }
-          
-          if (events.length > 0) {
-            lastEventTs = Math.max(...events.map(e => e.ts));
-          }
-          
-          document.getElementById('statusText').textContent = 'Live (API)';
-          render();
-          return;
-        }
-      } catch (err) {
-        // API not available, fall back to demo
-        console.log('API not available, using demo data');
-      }
-      
-      // Fallback to demo data
-      if (!useApi && events.length === 0) {
-        events = DEMO_EVENTS;
-        document.getElementById('statusText').textContent = 'Demo mode';
+        if (!res.ok) throw new Error('API error');
+        
+        events = await res.json();
+        statusText.textContent = `Live · ${events.length} events`;
+        statusPulse.className = 'pulse';
         render();
-      } else if (useApi) {
-        document.getElementById('statusText').textContent = 'Reconnecting...';
+      } catch (err) {
+        statusText.textContent = 'API offline';
+        statusPulse.className = 'pulse error';
+        console.error('Fetch error:', err);
       }
     }
-
-    // Filter buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    
+    async function fetchStats() {
+      try {
+        const res = await fetch(`${API_URL}/api/stats`, { signal: AbortSignal.timeout(3000) });
+        if (!res.ok) return;
+        
+        const stats = await res.json();
+        
+        document.getElementById('totalEvents').textContent = formatNumber(stats.total);
+        document.getElementById('toolCalls').textContent = formatNumber(stats.byType?.tool || 0);
+        document.getElementById('errorCount').textContent = formatNumber(stats.errors);
+        document.getElementById('totalTokens').textContent = formatNumber(stats.totalTokens);
+        document.getElementById('totalCost').textContent = stats.totalCost > 0 
+          ? '$' + stats.totalCost.toFixed(2) 
+          : '-';
+      } catch {}
+    }
+    
+    async function fetchFilters() {
+      try {
+        const [agentsRes, toolsRes] = await Promise.all([
+          fetch(`${API_URL}/api/agents`, { signal: AbortSignal.timeout(2000) }),
+          fetch(`${API_URL}/api/tools`, { signal: AbortSignal.timeout(2000) })
+        ]);
+        
+        if (agentsRes.ok) {
+          const agents = await agentsRes.json();
+          const select = document.getElementById('agentSelect');
+          agents.forEach(a => {
+            const opt = document.createElement('option');
+            opt.value = a;
+            opt.textContent = a;
+            select.appendChild(opt);
+          });
+        }
+        
+        if (toolsRes.ok) {
+          const tools = await toolsRes.json();
+          const select = document.getElementById('toolSelect');
+          tools.filter(t => t !== 'result' && t !== 'usage').forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t;
+            opt.textContent = t;
+            select.appendChild(opt);
+          });
+        }
+      } catch {}
+    }
+    
+    // Event listeners
+    document.querySelectorAll('#typeFilters .pill').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#typeFilters .pill').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
+        filters.type = btn.dataset.type;
         render();
       });
     });
-
-    // Auto-refresh toggle
-    document.getElementById('autoRefresh').addEventListener('change', (e) => {
-      autoRefresh = e.target.checked;
-      if (autoRefresh) {
-        refreshInterval = setInterval(fetchEvents, 5000);
-      } else {
-        clearInterval(refreshInterval);
-      }
+    
+    document.querySelectorAll('#statusFilters .pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#statusFilters .pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filters.status = btn.dataset.status;
+        render();
+      });
     });
-
-    // Manual refresh
-    document.getElementById('refreshBtn').addEventListener('click', fetchEvents);
-
-    // Initial load
+    
+    document.getElementById('agentSelect').addEventListener('change', (e) => {
+      filters.agent = e.target.value;
+      fetchEvents();
+    });
+    
+    document.getElementById('toolSelect').addEventListener('change', (e) => {
+      filters.tool = e.target.value;
+      render();
+    });
+    
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      fetchEvents();
+      fetchStats();
+    });
+    
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      limit += 100;
+      render();
+    });
+    
+    // Initialize
+    fetchFilters();
     fetchEvents();
-    refreshInterval = setInterval(fetchEvents, 5000);
-
-    // Populate date selector
-    const dateSelect = document.getElementById('dateSelect');
-    for (let i = 1; i < 7; i++) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const opt = document.createElement('option');
-      opt.value = d.toISOString().split('T')[0];
-      opt.textContent = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-      dateSelect.appendChild(opt);
-    }
+    fetchStats();
+    
+    // Auto-refresh every 10s
+    setInterval(() => {
+      fetchEvents();
+      fetchStats();
+    }, 10000);
   </script>
 </body>
 </html>

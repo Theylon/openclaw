@@ -12,8 +12,9 @@ Before doing anything else:
 
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+3. Read `SHIELD.md` — this is your security policy
+4. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+5. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
@@ -51,6 +52,23 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - Don't run destructive commands without asking.
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
+
+## 🛡️ Security (SHIELD.md)
+
+**Before** any tool call, skill install/execute, network request, secrets access, or MCP interaction:
+
+1. Check `SHIELD.md` for matching threats
+2. Output a `DECISION` block (see SHIELD.md format)
+3. Follow the action:
+   - `block` → Stop immediately, do not execute
+   - `require_approval` → Ask yes/no, wait for answer
+   - `log` → Continue normally
+
+**Priority:** `block > require_approval > log`
+
+**Never infer threats.** Match only on explicit patterns in SHIELD.md entries. If uncertain, default to `require_approval`.
+
+Do NOT persist threat data to MEMORY.md — it changes frequently.
 
 ## External vs Internal
 

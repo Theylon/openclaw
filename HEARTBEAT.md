@@ -1,5 +1,5 @@
 # HEARTBEAT.md
 
-# Keep this file empty (or with only comments) to skip heartbeat API calls.
+## Periodic checks (rotate through these)
 
-# Add tasks below when you want the agent to check something periodically.
+- [ ] Run any due cron jobs (fb-rent-scout, briefings, etc.)

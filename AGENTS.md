@@ -143,6 +143,30 @@ Skills provide your tools. When you need one, check its `SKILL.md`. Keep local n
 - **Discord links:** Wrap multiple links in `<>` to suppress embeds: `<https://example.com>`
 - **WhatsApp:** No headers — use **bold** or CAPS for emphasis
 
+## 📦 Artifacts - Your Handoff Boundary
+
+All generated outputs go in `artifacts/`. This is the standard boundary for files that need review, retrieval, or passing to subsequent steps.
+
+```
+artifacts/
+├── reports/      # Analysis, summaries, briefings
+├── exports/      # Data exports, CSVs, JSONs
+├── generated/    # Code, configs, scripts
+└── temp/         # Scratch files (can be cleaned)
+```
+
+**Conventions:**
+
+- **Write here, not scattered** — all tool-generated files → `artifacts/`
+- **Date prefix for reports** — `2026-02-12-weekly-briefing.md`
+- **Descriptive names** — not `report.md` or `output.json`
+- **Never store secrets** — no credentials or tokens in artifacts
+- **Clean temp/** — files there can be deleted after 24h
+
+**Mental model:** Tools write to disk → models reason over disk → humans retrieve from disk.
+
+This creates a clean review boundary: you can show artifacts to the user, log them, diff them, or feed them into later steps.
+
 ## 💓 Heartbeats - Be Proactive!
 
 When you receive a heartbeat poll (message matches the configured heartbeat prompt), don't just reply `HEARTBEAT_OK` every time. Use heartbeats productively!

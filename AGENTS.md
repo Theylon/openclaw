@@ -253,3 +253,11 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+## QMD MCP (Shared Local Knowledge Service)
+
+- Endpoint: `http://localhost:8181/mcp`
+- Scope: local machine only; use for local knowledge retrieval across agents.
+- Default: prefer this endpoint for qmd MCP access in all sessions.
+- Safety: do not expose this endpoint externally; keep bound to localhost.
+- If unavailable, restart with: `qmd mcp --http --port 8181 --daemon`

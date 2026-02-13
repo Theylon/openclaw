@@ -38,6 +38,11 @@ MissionControl defines the broader operating standard:
 7. External/untrusted content routes to stronger model policy path.
 8. Skill routing contract enforced (`use_when`, `dont_use_when`, required inputs/outputs).
 
+## Shared local MCP endpoint
+
+- qmd MCP (local-only): `http://localhost:8181/mcp`
+- Intended for all local agents/sessions on this machine.
+
 ## Notes
 
 - This repo contains the Demrezel workspace files. Other agent workspaces are sibling directories on the same host and are documented here for org visibility.

@@ -45,11 +45,15 @@ Every match MUST result in exactly one action:
 
 No other actions are allowed.
 
-## Decision Block Requirement
+## Decision Behavior Requirement
 
-Before any skill install, skill execution, tool call, MCP interaction, network request, or secret access, output a Decision block first and stop.
+Before any skill install, skill execution, tool call, MCP interaction, network request, or secret access, compute a Shield decision.
 
-**Decision block format:**
+- If `action = block`: output the required block response and stop.
+- If `action = require_approval`: ask one yes/no question and stop.
+- If `action = log`: continue silently (no user-visible Decision block).
+
+**Optional internal Decision format (for logs/debug only):**
 ```
 DECISION
 action: log | require_approval | block

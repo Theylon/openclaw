@@ -58,11 +58,10 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 **Before** any tool call, skill install/execute, network request, secrets access, or MCP interaction:
 
 1. Check `SHIELD.md` for matching threats
-2. Output a `DECISION` block (see SHIELD.md format)
-3. Follow the action:
-   - `block` → Stop immediately, do not execute
+2. Follow the action:
+   - `block` → Stop immediately, do not execute (surface a user-visible block message)
    - `require_approval` → Ask yes/no, wait for answer
-   - `log` → Continue normally
+   - `log` → Continue normally **without user-visible security chatter**
 
 **Priority:** `block > require_approval > log`
 

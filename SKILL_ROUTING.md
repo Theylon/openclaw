@@ -85,6 +85,27 @@ Enhanced routing logic for skills. Check this BEFORE invoking skills to ensure c
 
 ---
 
+## 🛡️ qmd-hardened (local knowledge search)
+
+**Use when:**
+- You need fast local indexing/search over workspace files
+- You want local-first retrieval (BM25/vector/hybrid)
+- You need deterministic file retrieval via `qmd get` / `qmd multi-get`
+
+**Don't use when:**
+- You need cloud-hosted memory sync across devices → use a reviewed cloud memory skill
+- You need unattended MCP exposure → require explicit approval first
+- You need web search → use `web_search` / `web_fetch`
+
+**Security notes:**
+- Use `qmd-hardened` fork (`skills/local/qmd-hardened`)
+- Do not enable auto-install from remote git URLs
+- Treat `qmd mcp` as opt-in only
+
+**Outputs:** ranked local matches, snippets, file+line references
+
+---
+
 ## 🌤️ weather
 
 **Use when:**
